@@ -13,6 +13,9 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', socket => {
   console.log('new web socket connection')
   socket.emit('message', 'Welcome!')
+  socket.on('sendMessage', message => {
+    io.emit('message', message)
+  })
 })
 
 const port = process.env.PORT || 3000
